@@ -4,54 +4,163 @@
     box-sizing: border-box;
 }
 
+:root {
+    /* Brand — primary interactive & emphasis color */
+    --color-brand-primary: #4a3fff;
+    --color-brand-primary-hover: #3b31cc;
+    --color-brand-primary-active: #3129a8;
+    --color-brand-on-primary: #ffffff;
+    --color-brand-subtle: color-mix(in srgb, var(--color-brand-primary) 12%, white);
+    --color-brand-border: color-mix(in srgb, var(--color-brand-primary) 35%, transparent);
+
+    --color-surface-page: #f4f3fb;
+    --color-surface-card: #ffffff;
+    --color-surface-card-alt: #faf9ff;
+
+    --color-text-primary: #14121f;
+    --color-text-secondary: #4a4758;
+    --color-text-muted: #6e6a7e;
+
+    --shadow-card: 0 1px 2px rgb(20 18 31 / 6%), 0 8px 24px rgb(74 63 255 / 8%);
+    --shadow-card-hover: 0 4px 12px rgb(20 18 31 / 8%), 0 16px 40px rgb(74 63 255 / 12%);
+    --radius-card: 20px;
+    --radius-pill: 999px;
+
+    --motion-duration: 0.22s;
+    --motion-ease: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --motion-duration: 0.01ms;
+    }
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: #f5f5f5;
+    font-family: "Mona Sans", system-ui, -apple-system, sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-variation-settings: "wdth" 100;
+    background: radial-gradient(
+            120% 80% at 50% 0%,
+            color-mix(in srgb, var(--color-brand-primary) 14%, transparent),
+            transparent 55%
+        ),
+        var(--color-surface-page);
+    color: var(--color-text-primary);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px;
+    padding: clamp(16px, 4vw, 32px);
 }
 
 .cards-container {
     display: flex;
     flex-direction: row;
-    gap: 24px;
     flex-wrap: nowrap;
+    gap: clamp(20px, 3vw, 28px);
     justify-content: center;
-    align-items: flex-start;
+    align-items: stretch;
+    width: 100%;
+    max-width: calc(320px * 3 + 28px * 2);
 }
 
 .card {
-    background-color: #eaedee;
-    border-radius: 12px;
-    padding: 20px;
-    width: 320px;
-    flex-shrink: 0;
+    background-color: var(--color-surface-card);
+    border-radius: var(--radius-card);
+    padding: clamp(22px, 4vw, 28px);
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 320px;
+    border: 1px solid color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--motion-duration) var(--motion-ease),
+        box-shadow var(--motion-duration) var(--motion-ease),
+        border-color var(--motion-duration) var(--motion-ease);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-card-hover);
+    }
+}
+
+.card--hobby,
+.card--enterprise {
+    background: linear-gradient(
+        165deg,
+        var(--color-surface-card) 0%,
+        var(--color-surface-card-alt) 100%
+    );
+}
+
+.card--pro {
+    background: linear-gradient(
+        165deg,
+        var(--color-surface-card) 0%,
+        color-mix(in srgb, var(--color-brand-primary) 6%, white) 100%
+    );
+    /* No separate border — the ::before ring is the only stroke (avoids double edge + radius mismatch) */
+    border: none;
+    position: relative;
+}
+
+.card--pro::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-card);
+    padding: 1px;
+    background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--color-brand-primary) 55%, transparent),
+        color-mix(in srgb, var(--color-brand-primary) 15%, transparent)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
 }
 
 .card-title {
-    font-size: 32px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 8px;
+    font-family: "Mona Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings: "wdth" 125;
+    font-size: clamp(1.75rem, 4vw, 2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--color-text-primary);
+    margin-bottom: 0.35em;
 }
 
 .card-price {
-    font-size: 20px;
-    color: #666;
-    margin-bottom: 24px;
+    font-size: 1.25rem;
+    font-weight: 550;
+    font-variation-settings: "wdth" 100;
+    color: var(--color-brand-primary);
+    margin-bottom: 1.35rem;
 }
 
 .card-content {
-    margin-bottom: 32px;
+    flex: 1;
+    margin-bottom: 1.5rem;
 }
 
 .includes-text {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-variation-settings: "wdth" 100;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
 }
 
 .features-list {
@@ -61,36 +170,100 @@ body {
 
 .features-list li {
     display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-    font-size: 15px;
-    color: #333;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    font-weight: 450;
+    font-variation-settings: "wdth" 100;
+    color: var(--color-text-primary);
+    padding: 0.35rem 0.4rem;
+    margin-left: -0.4rem;
+    margin-right: -0.4rem;
+    border-radius: 8px;
+    transition: background-color var(--motion-duration) var(--motion-ease);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .features-list li:hover {
+        background-color: color-mix(in srgb, var(--color-brand-primary) 6%, transparent);
+    }
+}
+
+.features-list li:last-child {
+    margin-bottom: 0;
 }
 
 .checkmark {
-    color: #4a4a4a;
-    font-size: 18px;
-    margin-right: 12px;
-    font-weight: bold;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    margin-top: 0.08em;
+    border-radius: 50%;
+    font-size: 0.5625rem;
+    font-weight: 700;
+    color: var(--color-brand-on-primary);
+    background: var(--color-brand-primary);
+    line-height: 1;
 }
 
 .download-button {
-    width: fit-content;
-    background-color: #e6e5e0;
+    width: 100%;
     border: none;
-    border-radius: 999px;
-    padding: 14px 24px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #333;
+    border-radius: var(--radius-pill);
+    padding: 0.875rem 1.25rem;
+    font-family: inherit;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-variation-settings: "wdth" 100;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color var(--motion-duration) var(--motion-ease),
+        color var(--motion-duration) var(--motion-ease),
+        transform var(--motion-duration) var(--motion-ease),
+        box-shadow var(--motion-duration) var(--motion-ease);
 }
 
-.download-button:hover {
-    background-color: #D8D6CE;
+.download-button:focus-visible {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 3px;
 }
 
-.download-button:active {
-    background-color: #D8D6CE;
+.download-button--primary {
+    background-color: var(--color-brand-primary);
+    color: var(--color-brand-on-primary);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--color-brand-primary) 35%, transparent);
+}
+
+.download-button--primary:hover {
+    background-color: var(--color-brand-primary-hover);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--color-brand-primary) 40%, transparent);
+}
+
+.download-button--primary:active {
+    background-color: var(--color-brand-primary-active);
+}
+
+.download-button--secondary {
+    background-color: var(--color-brand-subtle);
+    color: var(--color-brand-primary-hover);
+    border: 1px solid color-mix(in srgb, var(--color-brand-primary) 22%, transparent);
+}
+
+.download-button--secondary:hover {
+    background-color: color-mix(in srgb, var(--color-brand-primary) 18%, white);
+    border-color: color-mix(in srgb, var(--color-brand-primary) 35%, transparent);
+}
+
+.download-button--secondary:active {
+    background-color: color-mix(in srgb, var(--color-brand-primary) 26%, white);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .download-button:active {
+        transform: scale(0.98);
+    }
 }

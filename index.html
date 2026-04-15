@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pricing Plans</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="cards-container">
-        <div class="card">
+        <div class="card card--hobby">
             <h1 class="card-title">Hobby</h1>
             <p class="card-price">Free</p>
             <div class="card-content">
@@ -16,21 +19,21 @@
                 <ul class="features-list">
                     <li>
                         <span class="checkmark">✓</span>
-                        No credit card required
+                        No card needed
                     </li>
                     <li>
                         <span class="checkmark">✓</span>
-                        Limited Agent requests
+                        Limited Agents
                     </li>
                     <li>
                         <span class="checkmark">✓</span>
-                        Limited Tab completions
+                        Limited Tabs
                     </li>
                 </ul>
             </div>
-            <button class="download-button">Download</button>
+            <button type="button" class="download-button download-button--secondary">Download</button>
         </div>
-        <div class="card">
+        <div class="card card--pro">
             <h1 class="card-title">Pro</h1>
             <p class="card-price">$20/mo.</p>
             <div class="card-content">
@@ -38,11 +41,11 @@
                 <ul class="features-list">
                     <li>
                         <span class="checkmark">✓</span>
-                        Extended limits on Agent
+                        More Agents
                     </li>
                     <li>
                         <span class="checkmark">✓</span>
-                        Unlimited Tab completions
+                        Unlimited Tabs
                     </li>
                     <li>
                         <span class="checkmark">✓</span>
@@ -50,11 +53,41 @@
                     </li>
                     <li>
                         <span class="checkmark">✓</span>
-                        Maximum context windows
+                        Max context
                     </li>
                 </ul>
             </div>
-            <button class="download-button">Get Pro</button>
+            <button type="button" class="download-button download-button--primary">Get Pro</button>
+        </div>
+        <div class="card card--enterprise">
+            <h1 class="card-title">Enterprise</h1>
+            <p class="card-price">$99/mo.</p>
+            <div class="card-content">
+                <p class="includes-text">Everything in Pro, plus:</p>
+                <ul class="features-list">
+                    <li>
+                        <span class="checkmark">✓</span>
+                        SSO, SAML, SCIM
+                    </li>
+                    <li>
+                        <span class="checkmark">✓</span>
+                        Org-wide admin
+                    </li>
+                    <li>
+                        <span class="checkmark">✓</span>
+                        Audit logs, analytics
+                    </li>
+                    <li>
+                        <span class="checkmark">✓</span>
+                        Priority support, SLA
+                    </li>
+                    <li>
+                        <span class="checkmark">✓</span>
+                        Custom limits, deploy
+                    </li>
+                </ul>
+            </div>
+            <button type="button" class="download-button download-button--secondary">Contact sales</button>
         </div>
     </div>
 </body>
