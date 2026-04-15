@@ -3,92 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing Plans</title>
+    <title>Pricing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="cards-container">
-        <div class="card card--hobby">
-            <h1 class="card-title">Hobby</h1>
-            <p class="card-price">Free</p>
-            <div class="card-content">
-                <p class="includes-text">Includes:</p>
-                <ul class="features-list">
-                    <li>
-                        <span class="checkmark">✓</span>
-                        No card needed
-                    </li>
-                    <li>
-                        <span class="checkmark">✓</span>
-                        Limited Agents
-                    </li>
-                    <li>
-                        <span class="checkmark">✓</span>
-                        Limited Tabs
-                    </li>
-                </ul>
-            </div>
-            <button type="button" class="download-button download-button--secondary">Download</button>
+    <main class="pricing">
+        <h1 class="pricing-title">Pricing</h1>
+
+        <div class="billing-toggle" role="radiogroup" aria-label="Billing period">
+            <label class="billing-toggle__option">
+                <input class="billing-toggle__input" type="radio" name="billing" value="monthly" checked>
+                <span class="billing-toggle__text">Monthly</span>
+            </label>
+            <label class="billing-toggle__option">
+                <input class="billing-toggle__input" type="radio" name="billing" value="yearly">
+                <span class="billing-toggle__text">Yearly</span>
+            </label>
         </div>
-        <div class="card card--pro">
-            <h1 class="card-title">Pro</h1>
-            <p class="card-price">$20/mo.</p>
-            <div class="card-content">
-                <p class="includes-text">Everything in Hobby, plus:</p>
-                <ul class="features-list">
-                    <li>
-                        <span class="checkmark">✓</span>
-                        More Agents
-                    </li>
-                    <li>
-                        <span class="checkmark">✓</span>
-                        Unlimited Tabs
-                    </li>
-                    <li>
-                        <span class="checkmark">✓</span>
-                        Background Agents
-                    </li>
-                    <li>
-                        <span class="checkmark">✓</span>
-                        Max context
-                    </li>
-                </ul>
+
+        <div class="pricing-plans">
+        <h2 class="pricing-section-title">Individual Plans</h2>
+
+        <div class="cards-container">
+            <div class="card card--hobby">
+                <div class="card-title-row">
+                    <h3 class="card-title">Hobby</h3>
+                </div>
+                <p class="card-price">
+                    <span class="card-price__value card-price__value--word">Free</span>
+                </p>
+                <div class="card-content">
+                    <p class="includes-text">Includes:</p>
+                    <ul class="features-list">
+                        <li>
+                            <span class="checkmark">✓</span>
+                            No credit card required
+                        </li>
+                        <li>
+                            <span class="checkmark">✓</span>
+                            Limited Agent requests
+                        </li>
+                        <li>
+                            <span class="checkmark">✓</span>
+                            Limited Tab completions
+                        </li>
+                    </ul>
+                </div>
+                <button type="button" class="download-button download-button--secondary">Download</button>
             </div>
-            <button type="button" class="download-button download-button--primary">Get Pro</button>
-        </div>
-        <div class="card card--enterprise">
-            <h1 class="card-title">Enterprise</h1>
-            <p class="card-price">$99/mo.</p>
-            <div class="card-content">
-                <p class="includes-text">Everything in Pro, plus:</p>
-                <ul class="features-list">
-                    <li>
-                        <span class="checkmark">✓</span>
-                        SSO, SAML, SCIM
-                    </li>
-                    <li>
-                        <span class="checkmark">✓</span>
-                        Org-wide admin
-                    </li>
-                    <li>
-                        <span class="checkmark">✓</span>
-                        Audit logs, analytics
-                    </li>
-                    <li>
-                        <span class="checkmark">✓</span>
-                        Priority support, SLA
-                    </li>
-                    <li>
-                        <span class="checkmark">✓</span>
-                        Custom limits, deploy
-                    </li>
-                </ul>
+
+            <div class="card card--hobby">
+                <div class="card-title-row">
+                    <h3 class="card-title">Pro</h3>
+                </div>
+                <p class="card-price" data-monthly="20" data-yearly="16" aria-label="20 US dollars per month">
+                    <span class="card-price__figure">
+                        <span class="card-price__currency" aria-hidden="true">$</span><span class="card-price__value">20</span>
+                    </span><span class="card-price__suffix">/mo</span>
+                </p>
+                <div class="card-content">
+                    <p class="includes-text">Everything in Hobby, plus:</p>
+                    <ul class="features-list">
+                        <li>
+                            <span class="checkmark">✓</span>
+                            Extended limits on Agent
+                        </li>
+                        <li>
+                            <span class="checkmark">✓</span>
+                            Access to frontier models
+                        </li>
+                        <li>
+                            <span class="checkmark">✓</span>
+                            MCPs, skills, and hooks
+                        </li>
+                        <li>
+                            <span class="checkmark">✓</span>
+                            Cloud agents
+                        </li>
+                    </ul>
+                </div>
+                <button type="button" class="download-button download-button--secondary">Get Pro</button>
             </div>
-            <button type="button" class="download-button download-button--secondary">Contact sales</button>
+
+            <div class="card card--pro">
+                <div class="card-title-row">
+                    <h3 class="card-title">Pro+</h3>
+                    <span class="card-badge">Recommended</span>
+                </div>
+                <p class="card-price" data-monthly="60" data-yearly="48" aria-label="60 US dollars per month">
+                    <span class="card-price__figure">
+                        <span class="card-price__currency" aria-hidden="true">$</span><span class="card-price__value">60</span>
+                    </span><span class="card-price__suffix">/mo</span>
+                </p>
+                <div class="card-content">
+                    <p class="includes-text">Everything in Pro, plus:</p>
+                    <ul class="features-list">
+                        <li>
+                            <span class="checkmark">✓</span>
+                            3x usage on all OpenAI, Claude, Gemini models
+                        </li>
+                    </ul>
+                </div>
+                <button type="button" class="download-button download-button--primary">Get Pro+</button>
+            </div>
+
+            <div class="card card--hobby">
+                <div class="card-title-row">
+                    <h3 class="card-title">Ultra</h3>
+                </div>
+                <p class="card-price" data-monthly="200" data-yearly="160" aria-label="200 US dollars per month">
+                    <span class="card-price__figure">
+                        <span class="card-price__currency" aria-hidden="true">$</span><span class="card-price__value">200</span>
+                    </span><span class="card-price__suffix">/mo</span>
+                </p>
+                <div class="card-content">
+                    <p class="includes-text">Everything in Pro, plus:</p>
+                    <ul class="features-list">
+                        <li>
+                            <span class="checkmark">✓</span>
+                            20x usage on all OpenAI, Claude, Gemini models
+                        </li>
+                        <li>
+                            <span class="checkmark">✓</span>
+                            Priority access to new features
+                        </li>
+                    </ul>
+                </div>
+                <button type="button" class="download-button download-button--secondary">Get Ultra</button>
+            </div>
         </div>
-    </div>
+        </div>
+    </main>
+    <script>
+        (function () {
+            var radios = document.querySelectorAll('input[name="billing"]');
+            var priceBlocks = document.querySelectorAll(".card-price[data-monthly]");
+
+            function labelFor(amount, period) {
+                if (period === "yearly") {
+                    return amount + " US dollars per month when billed annually";
+                }
+                return amount + " US dollars per month";
+            }
+
+            function update() {
+                var checked = document.querySelector('input[name="billing"]:checked');
+                var period = checked && checked.value === "yearly" ? "yearly" : "monthly";
+                priceBlocks.forEach(function (block) {
+                    var monthly = block.getAttribute("data-monthly");
+                    var yearly = block.getAttribute("data-yearly");
+                    var valueEl = block.querySelector(".card-price__value");
+                    if (!valueEl || valueEl.classList.contains("card-price__value--word")) return;
+                    var amount = period === "yearly" ? yearly : monthly;
+                    valueEl.textContent = amount;
+                    block.setAttribute("aria-label", labelFor(amount, period));
+                });
+            }
+
+            radios.forEach(function (r) {
+                r.addEventListener("change", update);
+            });
+            update();
+        })();
+    </script>
 </body>
 </html>
