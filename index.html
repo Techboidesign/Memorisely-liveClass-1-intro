@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark light">
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem("memorisely-theme") || "system";
+                document.documentElement.setAttribute("data-theme", t);
+            } catch (e) {}
+        })();
+    </script>
     <title>Pricing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -137,6 +146,56 @@
         </div>
         </div>
     </main>
+
+    <div class="theme-switch" role="group" aria-label="Color theme">
+        <button type="button" class="theme-switch__btn" data-set-theme="dark" aria-pressed="false" title="Dark theme" aria-label="Dark theme">
+            <span class="theme-switch__icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </span>
+        </button>
+        <button type="button" class="theme-switch__btn" data-set-theme="light" aria-pressed="false" title="Light theme" aria-label="Light theme">
+            <span class="theme-switch__icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            </span>
+        </button>
+        <button type="button" class="theme-switch__btn" data-set-theme="system" aria-pressed="false" title="Use system theme" aria-label="System theme (follow device)">
+            <span class="theme-switch__icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </span>
+        </button>
+    </div>
+
+    <script>
+        (function () {
+            var STORAGE_KEY = "memorisely-theme";
+            var root = document.documentElement;
+            var buttons = document.querySelectorAll(".theme-switch__btn");
+
+            function getTheme() {
+                return root.getAttribute("data-theme") || "system";
+            }
+
+            function setTheme(theme) {
+                if (theme !== "dark" && theme !== "light" && theme !== "system") return;
+                root.setAttribute("data-theme", theme);
+                try {
+                    localStorage.setItem(STORAGE_KEY, theme);
+                } catch (e) {}
+                buttons.forEach(function (btn) {
+                    var active = btn.getAttribute("data-set-theme") === theme;
+                    btn.setAttribute("aria-pressed", active ? "true" : "false");
+                });
+            }
+
+            buttons.forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    setTheme(btn.getAttribute("data-set-theme"));
+                });
+            });
+
+            setTheme(getTheme());
+        })();
+    </script>
     <script>
         (function () {
             var radios = document.querySelectorAll('input[name="billing"]');
